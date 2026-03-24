@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>
-            Planning app
-        </title>
-    </head>
-    <body>
-        <h1>Planning app</h1> 
-        <p>Now we are using templates.</p>
-    </body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+    <h1>Min planeringsapp</h1>
+    <p>Nu använder vi template inheritance.</p>
+{% endblock %}

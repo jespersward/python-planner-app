@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %}Planner{% endblock %}</title>
+    </head>    
+    <body>
+
+        <nav>
+            <a href="/">Home</a>
+        </nav>
+
+        <hr>
+
+        {% block content %} <!-- This is Flasks templating-language -->
+        {% endblock %}      <!-- Means, other templates can add content here-->
+
+    </body>
+</html>
