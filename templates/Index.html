@@ -6,5 +6,21 @@ Home
 
 {% block content %}
     <h1>Min planeringsapp</h1>
-    <p>Nu använder vi template inheritance.</p>
+    <p>Planerade aktiviteter:</p>
+
+    {% if events %}
+        <ul>
+            {% for event in events %}
+                <li>
+                    <strong>{{ event.title }}</strong><br>
+                    Date: {{ event.date }}<br>
+                    Time: {{ event.start_time }} - {{ event.end_time }}<br>
+                    Description: {{ event.description }}
+                </li>
+                <br>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Inga kommande aktiviteter.</p>    
+    {% endif %}
 {% endblock %}

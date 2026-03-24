@@ -49,7 +49,8 @@ def add_event():
 # Adds route to Homepage
 @app.route("/")
 def home():
-    return render_template("index.html")
+    events = Event.query.all() # Retrieves all rows from Event-table
+    return render_template("index.html", events = events) # Render index.html and give access to variable "events"
 
 
 if __name__ == "__main__":
