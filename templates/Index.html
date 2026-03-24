@@ -15,7 +15,9 @@ Home
                     <strong>{{ event.title }}</strong><br>
                     Date: {{ event.date }}<br>
                     Time: {{ event.start_time }} - {{ event.end_time }}<br>
-                    Description: {{ event.description }}
+                    Description: {{ event.description }}<br>
+                    <a href="/edit/{{ event.id}}">Redigera</a>
+                    <a href="/delete/{{ event.id }}">Ta bort</a>
                 </li>
                 <br>
             {% endfor %}
