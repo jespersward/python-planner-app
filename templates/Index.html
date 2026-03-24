@@ -6,23 +6,48 @@ Home
 
 {% block content %}
     <h1>Min planeringsapp</h1>
-    <p>Planerade aktiviteter:</p>
 
-    {% if events %}
+    {% if today_events %}
+        <h2>Idag</h2>
         <ul>
-            {% for event in events %}
+            {% for event in today_events %}
                 <li>
                     <strong>{{ event.title }}</strong><br>
-                    Date: {{ event.date }}<br>
                     Time: {{ event.start_time }} - {{ event.end_time }}<br>
                     Description: {{ event.description }}<br>
-                    <a href="/edit/{{ event.id}}">Redigera</a>
+
+                    <a href="/edit/{{ event.id }}">Redigera</a> |
                     <a href="/delete/{{ event.id }}">Ta bort</a>
                 </li>
                 <br>
             {% endfor %}
         </ul>
-    {% else %}
-        <p>Inga kommande aktiviteter.</p>    
     {% endif %}
+
+    {% if grouped_events %}
+        <h2>Kommande aktiviteter</h2>
+
+        {% for date, events in grouped_events.items() %}
+            <h3>{{ date }}</h3>
+
+            <ul>
+                {% for event in events %}
+                    <li>
+                        <strong>{{ event.title }}</strong><br>
+                        Time: {{ event.start_time }} - {{ event.end_time }}<br>
+                        Description: {{ event.description }}<br>
+
+                        <a href="/edit/{{ event.id }}">Redigera</a> |
+                        <a href="/delete/{{ event.id }}">Ta bort</a>
+                    </li>
+                    <br>
+                {% endfor %}
+            </ul>
+        {% endfor %}
+    {% endif %}
+
+    {% if not today_events and not grouped_events %}
+        <p>Inga kommande aktiviteter.</p>
+    {% endif %}
+
 {% endblock %}

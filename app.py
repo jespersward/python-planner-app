@@ -1,8 +1,7 @@
 from flask import Flask, render_template, request, redirect
-#render_template shows HTML-pages
-#request reads data from forms
-#redirect sends user to another page
 from flask_sqlalchemy import SQLAlchemy
+from collections import defaultdict
+from datetime import date
 
 app = Flask(__name__)
 
@@ -53,7 +52,25 @@ def add_event():
 @app.route("/")
 def home():
     events = Event.query.order_by(Event.date, Event.start_time).all() # Retrieves all rows from Event-table in correct order
-    return render_template("index.html", events = events) # Render index.html and give access to variable "events"
+    
+    # Creating grouped events to fix structure of events
+    # All events on the same day will be shown in the same "box"
+    grouped_events = defaultdict(list)
+    today_events = []
+
+    today_str = date.today().isoformat()
+
+    for event in events:
+        if event.date == today_str:
+            today_events.append(event)
+        else:
+            grouped_events[event.date].append(event)
+
+    return render_template(
+        "index.html",
+        today_events = today_events,
+        grouped_events = grouped_events
+    ) # Render index.html and give access to variable "events"
 
 # Adds delete-route
 @app.route("/delete/<int:event_id>")
