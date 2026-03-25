@@ -6,20 +6,22 @@ Home
 
 {% block content %}
     <h1>Min planeringsapp</h1>
+    <h2>Planerade aktiviteter</h2>
 
     {% if today_events %}
         <h2>Idag</h2>
         <ul>
             {% for event in today_events %}
-                <li>
-                    <strong>{{ event.title }}</strong><br>
-                    Time: {{ event.start_time }} - {{ event.end_time }}<br>
-                    Description: {{ event.description }}<br>
+                <li class="event-card">
+                    <div class="event-title">{{ event.title }}</div>
+                    <div class="event-meta">Tid: {{ event.start_time }} - {{ event.end_time }}</div>
+                    <div class="event-meta">Beskrivning: {{ event.description }}</div>
 
-                    <a href="/edit/{{ event.id }}">Redigera</a> |
-                    <a href="/delete/{{ event.id }}">Ta bort</a>
+                    <div class="event-actions">
+                        <a href="/edit/{{ event.id }}">Redigera</a>
+                        <a href="/delete/{{ event.id }}">Ta bort</a>
+                    </div>
                 </li>
-                <br>
             {% endfor %}
         </ul>
     {% endif %}
@@ -32,15 +34,16 @@ Home
 
             <ul>
                 {% for event in events %}
-                    <li>
-                        <strong>{{ event.title }}</strong><br>
-                        Time: {{ event.start_time }} - {{ event.end_time }}<br>
-                        Description: {{ event.description }}<br>
+                    <li class="event-card">
+                        <div class="event-title">{{ event.title }}</div>
+                        <div class="event-meta">Tid: {{ event.start_time }} - {{ event.end_time }}</div>
+                        <div class="event-meta">Beskrivning: {{ event.description }}</div>
 
-                        <a href="/edit/{{ event.id }}">Redigera</a> |
-                        <a href="/delete/{{ event.id }}">Ta bort</a>
+                        <div class="event-actions">
+                            <a href="/edit/{{ event.id }}">Redigera</a>
+                            <a href="/delete/{{ event.id }}">Ta bort</a>
+                        </div>
                     </li>
-                    <br>
                 {% endfor %}
             </ul>
         {% endfor %}
